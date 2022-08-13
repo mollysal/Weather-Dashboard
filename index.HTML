@@ -15,22 +15,49 @@
     <header class="jumbotron text-center">
         <h1 class="display-3">Weather Dashboard</h1>
     </header>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Search Area -->
+                <div class="col-md-3 bg-light p-3" id="leftSide">
+                    <form id="search-form" class="mb-2">
+                        <input id="CityInput" class="form-input w-100" type="text" placeholder="City Name">
+                        <button class="btn btn-info btn-block">Search</button>
+                    </form>
+                    <!-- Left Search Area - Cities from LS -->
+                    <div class="list-group my-3">
+                    </div>
+                </div>
+                <!-- Right Side Results -->
+                <div class="col-md-9">
+                    <!-- Current Weather Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"> <span id='currentCity'></span> <span id="currentDate"></span> <img
+                                    id="currentWeatherIcon" src="" alt="City's Current Weather Icon"></h5>
+                            <p class="card-text">Temp: <span id="cTemp"></span></p>
+                            <p class="card-text">Humidity: <span id="cHum"></span>%</p>
+                            <p class="card-text">Wind: <span id="cWind"></span>mph</p>
+                            <!-- UV Index would go here (Instructor said no to worry about UV bc of API pricing)-->
+                        </div>
+                    </div>
 
-    <div
-        class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh">
-        <div class="col-12 col-md-3 bg-light p-3">
-            <h1 class="text-primary">Search Location</h1>
-            <form id="search-form" class="mb-2">
-                <input id="search-input" class="form-input w-100" type="text" placeholder="Search!">
-                <button class="btn btn-info btn-block">Search</button>
-            </form>
-
-            <div class="col-12 col-md-9 p-3 text-light">
-                <h2>Showing results for <span id="result-text"></span></h2>
-                <div id="result-content"></div>
+                    <!-- 5 Day Look-ahead -->
+                    <div class="my-3">
+                        <h4> 5 Day Look-Ahead Forcast</h4>
+                        <div class="col-2 card">
+                            <h5 class="card-title" id="day0"></h5>
+                            <img src="" id="Img0">
+                            <p class="card-text">Temp: <span id="Temp0"></span></p>
+                            <p class="card-text">Humidity: <span id="Hum0"></span></p>
+                        </div>
+                        <!-- Insert More Days Here (Later)-->
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+    </main>
 
     <!-- JQuery & JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
