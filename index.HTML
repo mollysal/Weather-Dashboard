@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <!-- Jumbotron -->
+    <header class="jumbotron text-center">
+        <h1 class="display-3">Weather Dashboard</h1>
+    </header>
+
+    <div
+        class="flex-row align-start align-stretch-md align-content-start align-content-stretch-md min-100-vh">
+        <div class="col-12 col-md-3 bg-light p-3">
+            <h1 class="text-primary">Search Location</h1>
+            <form id="search-form" class="mb-2">
+                <input id="search-input" class="form-input w-100" type="text" placeholder="Search!">
+                <button class="btn btn-info btn-block">Search</button>
+            </form>
+
+            <div class="col-12 col-md-9 p-3 text-light">
+                <h2>Showing results for <span id="result-text"></span></h2>
+                <div id="result-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuery & JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./Develop/script.js"></script>
+</body>
+
+</html>
