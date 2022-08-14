@@ -1,56 +1,61 @@
 //Variables from Left Hand side
-var searchFormEl = $('#search-form');
-var searchInputEl = $('#cityInput');
-var searchListEl = $('.list-group');
+var searchFormEl = document.querySelector("#search-form");
+var searchInputEl = document.querySelector('#cityInput');
+var searchListEl = document.querySelector('.list-group');
 
 //Variables from Right Hand side 
-var rightSide = $('#rightSide');
-var currentWeatherEl = $('#currentWeatherEl');
-var currentCity = $('#currentCity');
-var currentDate = $('#currentDate').text(moment().format("M/D/YYYY"));
-var currentWeatherIcon = $('#currentWeatherIcon');
-var cTemp = $('#cTemp');
-var cHum = $('#cHum');
-var cWind = $('#cWind');
-var lookAheadEl = $('lookAhead');
+var rightSide = document.querySelector('#rightSide');
+var currentWeatherEl = document.querySelector('#currentWeatherEl');
+var currentCity = document.querySelector('#currentCity');
+var currentDate = document.querySelector('#currentDate');
+var currentWeatherIcon = document.querySelector('#currentWeatherIcon');
+var cTemp = document.querySelector('#cTemp');
+var cHum = document.querySelector('#cHum');
+var cWind = document.querySelector('#cWind');
+var lookAheadEl = document.querySelector('lookAhead');
 
 //API Key
 const apiKey = '64e8e895c4d71cf5e75c9837e6e88c15';
 
+//Search from Local Storage
+let search = JSON.parse(localStorage.getItem("search") || "[]");
+
+// ---------------------------------------------FUNCTIONS BELOW------------------------------------------------------ //
+
 //Take user input, City Name & Send cityName to get coordinates
-function handleSearchFormSubmit(event) {
+let formSubmitHandler = function(event) {
     event.preventDefault();
     let cityName = searchInputEl.value.trim();
+    searchInputEl.value = "";
 
     if (cityName) {
         getCoords(cityName);
     } else {
-        console.log("Enter valid City Name!");
         alert("Enter valid City Name!");
         return;
     }
 }
 
 //Take the city Name from above & convert to coordinates
-var getCoords = function(cityName) {
-    var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey;
+let getCoords = function(cityName) {
+    let apiURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName +'&limit=1&appid=' + apiKey;
 
     fetch(apiURL).then(function (res){
         return res.json();
     }).then(function(data) {
-        let lat = data.coord.lat;
-        let lon = data.coord.lon;
+        let lat = (data[0].lat);
+        let lon = (data[0].lon);
         getWeather(lat,lon);
     })
     .catch(function(error){
-        console.error(error);
+        console.error("error");
         return;
     })
 }
 
 //From the above coordinates go get the Weather
-var getWeather = function(lat, long) {
-    let apiURL = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat+ "&lon=" + lon + "&appid=" + apiKey + "&units=imperial"
+let getWeather = function(lat, long) {
+    let apiURL = 'https://api.openweathermap.org/data/3.0/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial}&appid=' + apiKey;
     //go to Weather API with Coordinates of the City
     fetch(apiURL).then(function(res){
         if(res.ok){
@@ -66,7 +71,7 @@ var getWeather = function(lat, long) {
 }
 
 //Display Current Weather (Top Area)
-var displayCurrentWeather = function(data) {
+let displayCurrentWeather = function(data) {
     //Unhide Right Side
     rightSide.addClass("display");
 
@@ -75,7 +80,7 @@ var displayCurrentWeather = function(data) {
     fetch(apiUrl).then(function(res){
         return res.json();
     }).then(function(data){
-        currentCity.text = cityName + " " + currentDate;
+        currentCity.text = cityName + " " + currentDate.text(moment().format("M/D/YYYY"));
         currentWeatherIcon.attr("src", "https://openweathermap.org/img/w/" + res.weather[0].icon + ".png");
         //take the date & insert it into Save City Function
         saveCity(data[0].name);
@@ -86,7 +91,7 @@ var displayCurrentWeather = function(data) {
 }
 
 //Display 5 day Look Ahead (Bottom Area)
-var displayLookAhead = function(data) {
+let displayLookAhead = function(data) {
     //Unhide Right Side
     rightSide.addClass("display");
 
@@ -114,10 +119,10 @@ var displayLookAhead = function(data) {
 
 //Saving the City Info
 let saveCity = function(cityName) {
-    if (searchFormEl.includes(cityName)){
+    if (search.includes(cityName)){
         return;
     } else {
-        searchFormEl.push(cityName)
+        search.push(cityName)
         localStorage.setItem("search", json.stringify(search));
         loadSearch();
     }
@@ -125,7 +130,7 @@ let saveCity = function(cityName) {
 
 //Loading past City Searches from Local Storage
 let loadSearch = function() {
-    if(search.lenth>0){
+    if(search.length>0){
         searchListEl.innerHTML = "";
         for (i=0; i<search.lenth; i++) {
             let searchBtn = document.createElement("button")
@@ -141,3 +146,10 @@ let loadSearch = function() {
 }
 
 //When you click a previously searched City - need to run through get coords again
+let reRunSearch = function(event) {
+    getCoords(event.target.innerHTML)
+}
+
+loadSearch();
+searchFormEl.addEventListener("submit", formSubmitHandler);
+searchListEl.addEventListener("click", reRunSearch);

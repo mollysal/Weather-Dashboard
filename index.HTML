@@ -23,7 +23,7 @@
                     <h3>Search by City:</h3>
                     <form id="search-form" class="my-2">
                         <input id="cityInput" class="form-input w-100" type="text" placeholder="City Name">
-                        <button class="btn btn-info btn-block mt-2">Search</button>
+                        <button type="submit" class="btn btn-info btn-block mt-2">Search</button>
                     </form>
                     <!-- Left Search Area - Cities from LS -->
                     <div class="list-group my-3">
@@ -45,15 +45,38 @@
                     </div>
 
                     <!-- 5 Day Look-ahead -->
-                    <div class="my-3" id="lookAhead">
-                        <h4> 5 Day Look-Ahead Forcast</h4>
+                    <h4 class="d-block"> 5 Day Look-Ahead Forcast</h4>
+                    <div class="row justify-content-around d-block d-xl-flex my-3" id="lookAhead">
                         <div class="col-2 card">
-                            <h5 class="card-title" id="day0"></h5>
-                            <img src="" id="Img0">
-                            <p class="card-text">Temp: <span id="Temp0"></span></p>
-                            <p class="card-text">Humidity: <span id="Hum0"></span></p>
+                            <h5 class="card-title" id="day1"></h5>
+                            <img src="" id="img1">
+                            <p class="card-text">Temp: <span id="temp1"></span></p>
+                            <p class="card-text">Humidity: <span id="hum1"></span></p>
                         </div>
-                        <!-- Insert More Days Here (Later)-->
+                        <div class="col-2 card">
+                            <h5 class="card-title" id="day2"></h5>
+                            <img src="" id="img2">
+                            <p class="card-text">Temp: <span id="temp2"></span></p>
+                            <p class="card-text">Humidity: <span id="hum2"></span></p>
+                        </div>
+                        <div class="col-2 card">
+                            <h5 class="card-title" id="day3"></h5>
+                            <img src="" id="img3">
+                            <p class="card-text">Temp: <span id="temp3"></span></p>
+                            <p class="card-text">Humidity: <span id="hum3"></span></p>
+                        </div>
+                        <div class="col-2 card">
+                            <h5 class="card-title" id="day4"></h5>
+                            <img src="" id="img4">
+                            <p class="card-text">Temp: <span id="temp4"></span></p>
+                            <p class="card-text">Humidity: <span id="hum4"></span></p>
+                        </div>
+                        <div class="col-2 card">
+                            <h5 class="card-title" id="day5"></h5>
+                            <img src="" id="img5">
+                            <p class="card-text">Temp: <span id="temp5"></span></p>
+                            <p class="card-text">Humidity: <span id="hum5"></span></p>
+                        </div>
                     </div>
                 </div>
             </div>
