@@ -36,51 +36,65 @@
                     <!-- Current Weather Card -->
                     <div class="card">
                         <div class="card-body" id="currentWeatherEl">
-                            <h5 class="card-title"> <span id='currentCity'></span> <span id="currentDate"></span> <img
-                                    id="currentWeatherIcon" src="" alt="City's Current Weather Icon"></h5>
-                            <p class="card-text">Temp: <span id="cTemp"></span></p>
-                            <p class="card-text">Humidity: <span id="cHum"></span>%</p>
-                            <p class="card-text">Wind: <span id="cWind"></span>mph</p>
-                            <!-- UV Index would go here (Instructor said no to worry about UV bc of API pricing)-->
+                            <div class="row">
+                                <div class="data-container col-4" id="current-data">
+                                    <h5 class="card-title"> <span id='currentCity'></span> <span
+                                            id="currentDate"></span></h5>
+                                    <p class="card-text">Temp: <span id="cTemp"></span> Degees F</p>
+                                    <p class="card-text">Humidity: <span id="cHum"></span> %</p>
+                                    <p class="card-text">Wind: <span id="cWind"></span> mph</p>
+                                    <!-- UV Index would go here (Instructor said not to worry about UV bc of API pricing)-->
+                                </div>
+                                <div class="col-4" id="spacer"></div>
+                                <div id="current-icon" class="col-4"></div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- 5 Day Look-ahead -->
-                    <h4 class="d-block"> 5 Day Look-Ahead Forcast</h4>
-                    <div class="row justify-content-around d-block d-xl-flex my-3" id="lookAhead">
-                        <div class="col-2 card">
-                            <h5 class="card-title" id="day1"></h5>
-                            <img src="" id="img1">
-                            <p class="card-text">Temp: <span id="temp1"></span></p>
-                            <p class="card-text">Humidity: <span id="hum1"></span></p>
-                        </div>
-                        <div class="col-2 card">
-                            <h5 class="card-title" id="day2"></h5>
-                            <img src="" id="img2">
-                            <p class="card-text">Temp: <span id="temp2"></span></p>
-                            <p class="card-text">Humidity: <span id="hum2"></span></p>
-                        </div>
-                        <div class="col-2 card">
-                            <h5 class="card-title" id="day3"></h5>
-                            <img src="" id="img3">
-                            <p class="card-text">Temp: <span id="temp3"></span></p>
-                            <p class="card-text">Humidity: <span id="hum3"></span></p>
-                        </div>
-                        <div class="col-2 card">
-                            <h5 class="card-title" id="day4"></h5>
-                            <img src="" id="img4">
-                            <p class="card-text">Temp: <span id="temp4"></span></p>
-                            <p class="card-text">Humidity: <span id="hum4"></span></p>
-                        </div>
-                        <div class="col-2 card">
-                            <h5 class="card-title" id="day5"></h5>
-                            <img src="" id="img5">
-                            <p class="card-text">Temp: <span id="temp5"></span></p>
-                            <p class="card-text">Humidity: <span id="hum5"></span></p>
+                    <div id="lookAhead" class="p-3">
+                        <h4 class="py-3 d-block"> 5 Day Look-Ahead Forcast</h4>
+                        <div class="row justify-content-around d-block d-xl-flex mr-0">
+                            <!-- Card 1 -->
+                            <div class="card text-center col m-2 p-0" id="card1">
+                                <h5 class="card-title" id="day1"></h5>
+                                <img src="" id="img1">
+                                <p class="card-text">Temp: <span id="temp1"></span></p>
+                                <p class="card-text">Humidity: <span id="hum1"></span></p>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="card text-center col m-2 p-0" id="card2">
+                                <h5 class="card-title" id="day2"></h5>
+                                <img src="" id="img2">
+                                <p class="card-text">Temp: <span id="temp2"></span></p>
+                                <p class="card-text">Humidity: <span id="hum2"></span></p>
+                            </div>
+                             <!-- Card 3 -->
+                             <div class="card text-center col m-2 p-0" id="card3">
+                                <h5 class="card-title" id="day3"></h5>
+                                <img src="" id="img3">
+                                <p class="card-text">Temp: <span id="temp3"></span></p>
+                                <p class="card-text">Humidity: <span id="hum3"></span></p>
+                            </div>
+                             <!-- Card 4 -->
+                             <div class="card text-center col m-2 p-0" id="card4">
+                                <h5 class="card-title" id="day4"></h5>
+                                <img src="" id="img4">
+                                <p class="card-text">Temp: <span id="temp4"></span></p>
+                                <p class="card-text">Humidity: <span id="hum4"></span></p>
+                            </div>
+                              <!-- Card 5 -->
+                              <div class="card text-center col m-2 p-0" id="card5">
+                                <h5 class="card-title" id="day5"></h5>
+                                <img src="" id="img5">
+                                <p class="card-text">Temp: <span id="temp5"></span></p>
+                                <p class="card-text">Humidity: <span id="hum5"></span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </main>

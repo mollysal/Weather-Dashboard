@@ -8,3 +8,8 @@
 #rightSide {
     visibility: hidden;
 }
+
+#current-icon img {
+    width: 100px;
+    height: 100px;
+} 
