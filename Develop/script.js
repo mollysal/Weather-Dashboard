@@ -1,14 +1,14 @@
 //Variables from Left Hand side
-var searchFormEl = document.querySelector("#search-form");
+var searchFormEl = document.querySelector('#search-form');
 var searchInputEl = document.querySelector('#cityInput');
-var searchListEl = document.querySelector('.list-group');
+var searchListEl = document.querySelector('#search-container');
 
 //Variables from Right Hand side 
 var rightSide = document.querySelector('#rightSide');
 var currentWeatherEl = document.querySelector('#currentWeatherEl');
 var currentCity = document.querySelector('#currentCity');
 var currentDate = document.querySelector('#currentDate');
-var currentIconEl = document.querySelector('#current-icon');
+var currentimgEl = document.querySelector('#currentimg');
 var cTemp = document.querySelector('#cTemp');
 var cHum = document.querySelector('#cHum');
 var cWind = document.querySelector('#cWind');
@@ -18,7 +18,7 @@ var lookAheadEl = document.querySelector('#lookAhead');
 const apiKey = '64e8e895c4d71cf5e75c9837e6e88c15';
 
 //Search from Local Storage
-let search = JSON.parse(localStorage.getItem("search") || "[]");
+var search = JSON.parse(localStorage.getItem("search") || "[]");
 
 // ---------------------------------------------FUNCTIONS BELOW------------------------------------------------------ //
 
@@ -30,7 +30,6 @@ let formSubmitHandler = function (event) {
 
     if (cityName) {
         getCoords(cityName);
-        console.log(cityName);
     } else {
         alert("Enter valid City Name!");
         return;
@@ -52,7 +51,7 @@ function getCoords(cityName) {
         let lon = (data[0].lon);
         console.log(lat + "," + lon);
 
-         //go to Weather API with Coordinates of the City
+        //go to Weather API with Coordinates of the City
         let apiURL1 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + apiKey;
 
         fetch(apiURL1).then(function (res) {
@@ -61,7 +60,7 @@ function getCoords(cityName) {
             } else {
                 alert("Enter a valid City");
             }
-        //If the results are valid go display the weather of the city
+            //If the results are valid go display the weather of the city
         }).then(function (data) {
             displayCurrentWeather(data);
             displayLookAhead(data);
@@ -73,25 +72,25 @@ function getCoords(cityName) {
         })
 }
 
-//From the above coordinates go get the Weather
-//function getWeather() {
-//}
-
 //Display Current Weather (Top Area)
 function displayCurrentWeather(data) {
     //Unhide Right Side
     rightSide.style.visibility = "visible";
 
-    let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + data.lat + '&lon=' + data.lon + '&appid=' + apiKey + '&units=imperial'
-    //let iconLink = "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png"
+    //let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + data.lat + '&lon=' + data.lon + '&appid=' + apiKey + '&units=imperial';
+    //New Attempt
+    let apiUrl = "https://api.openweathermap.org/geo/1.0/reverse?lat=" + data.lat + "&lon=" + data.lon + "&limit=1&appid=" + apiKey + '&units=imperial'
+
+    let iconLink = "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png";
 
     fetch(apiUrl).then(function (res) {
         return res.json();
     }).then(function (data) {
-        //currentIconEl.innerHTML = "<img src" + iconLink + ">";
-        //save Info was here ____________________________________
-        /* saveSearch(coord);
-        console.log(coord) */
+        let cIcon = document.querySelector("#currentimg");
+        cIcon.src = iconLink;
+        console.log(data[0].name);
+        cityName=data[0].name;
+        saveSeach(cityName);
     })
     cTemp.textContent = data.current.temp;
     cHum.textContent = data.current.humidity;
@@ -124,26 +123,26 @@ function displayLookAhead(data) {
 }
 
 //Saving the City Info
-let saveCity = function (cityName) {
+function saveSeach(cityName) {
     if (search.includes(cityName)) {
         return;
     } else {
         search.push(cityName)
-        localStorage.setItem("search", json.stringify(search));
+        localStorage.setItem("search", JSON.stringify(search));
         loadSearch();
     }
 }
 
 //Loading past City Searches from Local Storage
-let loadSearch = function () {
+function loadSearch() {
     if (search.length > 0) {
         searchListEl.innerHTML = "";
         for (i = 0; i < search.lenth; i++) {
             let searchBtn = document.createElement("button")
-            //adding class from BootStrap
-            searchBtn.className = "search-btn mb-2";
-            searchBtn.textContent = search[i];
+            searchBtn.className = "search-btn w-100 m-0 mb-2 pe-auto"
+            searchBtn.textContent = search[i]
             searchListEl.appendChild(searchBtn);
+            console.log(searchBtn);
         }
     } else {
         searchListEl.innerHTML = "";
@@ -151,7 +150,7 @@ let loadSearch = function () {
 }
 
 //When you click a previously searched City - need to run through get coords again
-let reRunSearch = function (event) {
+function reRunSearch(event) {
     getCoords(event.target.innerHTML)
 }
 

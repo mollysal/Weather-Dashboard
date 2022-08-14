@@ -13,3 +13,10 @@
     width: 100px;
     height: 100px;
 } 
+
+.search-btn {
+    color: white;
+    background-color: #006699;
+    border-radius: 5px;
+    padding: 3px;
+}
