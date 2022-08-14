@@ -30,6 +30,7 @@ let formSubmitHandler = function(event) {
 
     if (cityName) {
         getCoords(cityName);
+        console.log(cityName);
     } else {
         alert("Enter valid City Name!");
         return;
@@ -39,12 +40,14 @@ let formSubmitHandler = function(event) {
 //Take the city Name from above & convert to coordinates
 let getCoords = function(cityName) {
     let apiURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName +'&limit=1&appid=' + apiKey;
+    console.log("http://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=1&appid="+apiKey);
 
     fetch(apiURL).then(function (res){
         return res.json();
     }).then(function(data) {
         let lat = (data[0].lat);
         let lon = (data[0].lon);
+        console.log(lat + "," + lon);
         getWeather(lat,lon);
     })
     .catch(function(error){
@@ -56,6 +59,8 @@ let getCoords = function(cityName) {
 //From the above coordinates go get the Weather
 let getWeather = function(lat, long) {
     let apiURL = 'https://api.openweathermap.org/data/3.0/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial}&appid=' + apiKey;
+    console.log('https://api.openweathermap.org/data/3.0/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial}&appid=' + apiKey);
+    
     //go to Weather API with Coordinates of the City
     fetch(apiURL).then(function(res){
         if(res.ok){
@@ -153,3 +158,4 @@ let reRunSearch = function(event) {
 loadSearch();
 searchFormEl.addEventListener("submit", formSubmitHandler);
 searchListEl.addEventListener("click", reRunSearch);
+
