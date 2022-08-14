@@ -30,10 +30,11 @@
                     </div>
                 </div>
                 <!-- Right Side Results -->
-                <div class="col-md-9">
+                <!-- To Do: Add class to make hidden & Visible in CSS -->
+                <div class="col-md-9" id="rightSide">
                     <!-- Current Weather Card -->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" id="currentWeatherEl">
                             <h5 class="card-title"> <span id='currentCity'></span> <span id="currentDate"></span> <img
                                     id="currentWeatherIcon" src="" alt="City's Current Weather Icon"></h5>
                             <p class="card-text">Temp: <span id="cTemp"></span></p>
@@ -44,7 +45,7 @@
                     </div>
 
                     <!-- 5 Day Look-ahead -->
-                    <div class="my-3">
+                    <div class="my-3" id="lookAhead">
                         <h4> 5 Day Look-Ahead Forcast</h4>
                         <div class="col-2 card">
                             <h5 class="card-title" id="day0"></h5>
