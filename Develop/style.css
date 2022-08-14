@@ -1,0 +1,10 @@
+/* Right Side with Weather Info is Hidden until City is Searched*/
+.jumbotron {
+    background: linear-gradient(to bottom right, #006699 30%, #66ccff 100%);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-decoration: underline;
+}
+#rightSide {
+    visibility: hidden;
+}

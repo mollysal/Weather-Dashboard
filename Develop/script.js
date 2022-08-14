@@ -57,7 +57,7 @@ let getCoords = function(cityName) {
 }
 
 //From the above coordinates go get the Weather
-let getWeather = function(lat, long) {
+let getWeather = function(lat, lon) {
     let apiURL = 'https://api.openweathermap.org/data/3.0/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial}&appid=' + apiKey;
     console.log('https://api.openweathermap.org/data/3.0/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial}&appid=' + apiKey);
     
@@ -78,7 +78,7 @@ let getWeather = function(lat, long) {
 //Display Current Weather (Top Area)
 let displayCurrentWeather = function(data) {
     //Unhide Right Side
-    rightSide.addClass("display");
+    rightSide.addClass("visible");
 
     let apiUrl = "http://api.openweathermap.org/geo/1.0/reverse?lat="+ data.lat + "&lon=" + data.lon + "&limit=1&appid=" + apiKey
     
@@ -98,7 +98,7 @@ let displayCurrentWeather = function(data) {
 //Display 5 day Look Ahead (Bottom Area)
 let displayLookAhead = function(data) {
     //Unhide Right Side
-    rightSide.addClass("display");
+    rightSide.addClass("visible");
 
     //Establish a info for each card
     for (i = 1; i<6; i++) {
