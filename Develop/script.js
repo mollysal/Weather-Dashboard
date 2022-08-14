@@ -140,15 +140,13 @@ function loadSearch() {
         searchListEl.innerHTML = "";
         console.log(search.length);
 
-        for (i = 0; i < search.lenth; i++) {
-            let searchBtn = searchListEl.createElement("button");
+        for (i = 0; i < search.length; i++) {
+            let searchBtn = document.createElement("button");
             searchBtn.className = "search-btn w-100 m-0 mb-2 pe-auto";
-            search = localStorage.getItem("search", JSON.stringify(search), '');
+            //search = localStorage.getItem("search", JSON.stringify(search));
             searchBtn.textContent = search[i];
         
             searchListEl.appendChild(searchBtn);
-
-            console.log(searchBtn);
         }
     } else {
         searchListEl.innerHTML = "";
