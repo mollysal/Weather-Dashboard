@@ -77,7 +77,6 @@ function displayCurrentWeather(data) {
     //Unhide Right Side
     rightSide.style.visibility = "visible";
 
-    //let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + data.lat + '&lon=' + data.lon + '&appid=' + apiKey + '&units=imperial';
     //New Attempt
     let apiUrl = "https://api.openweathermap.org/geo/1.0/reverse?lat=" + data.lat + "&lon=" + data.lon + "&limit=1&appid=" + apiKey + '&units=imperial'
 
@@ -129,7 +128,9 @@ function saveSeach(cityName) {
     } else {
         search.push(cityName)
         localStorage.setItem("search", JSON.stringify(search));
+        var cityList = localStorage.getItem("search", JSON.stringify(search));
         loadSearch();
+        console.log(cityList);
     }
 }
 
@@ -137,11 +138,16 @@ function saveSeach(cityName) {
 function loadSearch() {
     if (search.length > 0) {
         searchListEl.innerHTML = "";
+        console.log(search.length);
+
         for (i = 0; i < search.lenth; i++) {
-            let searchBtn = document.createElement("button")
-            searchBtn.className = "search-btn w-100 m-0 mb-2 pe-auto"
-            searchBtn.textContent = search[i]
+            let searchBtn = searchListEl.createElement("button");
+            searchBtn.className = "search-btn w-100 m-0 mb-2 pe-auto";
+            search = localStorage.getItem("search", JSON.stringify(search), '');
+            searchBtn.textContent = search[i];
+        
             searchListEl.appendChild(searchBtn);
+
             console.log(searchBtn);
         }
     } else {
