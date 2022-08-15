@@ -35,7 +35,7 @@ let formSubmitHandler = function (event) {
         return;
     }
 }
-
+//city name is = to the input value
 let cityName = searchInputEl.value;
 
 //Take the city Name from above & convert to coordinates
@@ -79,7 +79,7 @@ function displayCurrentWeather(data) {
 
     //New Attempt
     let apiUrl = "https://api.openweathermap.org/geo/1.0/reverse?lat=" + data.lat + "&lon=" + data.lon + "&limit=1&appid=" + apiKey + '&units=imperial'
-
+    //Current Weather Icon
     let iconLink = "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png";
 
     fetch(apiUrl).then(function (res) {
@@ -91,6 +91,7 @@ function displayCurrentWeather(data) {
         cityName=data[0].name;
         saveSeach(cityName);
     })
+    //print the current weather to top card 
     cTemp.textContent = data.current.temp;
     cHum.textContent = data.current.humidity;
     cWind.textContent = data.current.wind_speed;
@@ -111,7 +112,7 @@ function displayLookAhead(data) {
     for (j = 1; j < 6; j++) {
         let currentData = data.daily[j];
         let iconLink = "https://openweathermap.org/img/w/" + currentData.weather[0].icon + ".png";
-
+        //print look-ahead weather to each card
         let icon = document.querySelector("#img" + j);
         icon.src = iconLink;
         let temp = document.querySelector('#temp' + j);
@@ -126,6 +127,7 @@ function saveSeach(cityName) {
     if (search.includes(cityName)) {
         return;
     } else {
+        //previously searched city names go to local storage in an array wiht the name of "search"
         search.push(cityName)
         localStorage.setItem("search", JSON.stringify(search));
         var cityList = localStorage.getItem("search", JSON.stringify(search));
@@ -138,14 +140,12 @@ function saveSeach(cityName) {
 function loadSearch() {
     if (search.length > 0) {
         searchListEl.innerHTML = "";
-        console.log(search.length);
-
+        //Creating Button for each City Name saved in Local Storage
         for (i = 0; i < search.length; i++) {
             let searchBtn = document.createElement("button");
             searchBtn.className = "search-btn w-100 m-0 mb-2 pe-auto";
-            //search = localStorage.getItem("search", JSON.stringify(search));
             searchBtn.textContent = search[i];
-        
+            //add button to SeachListEl (area below search button)
             searchListEl.appendChild(searchBtn);
         }
     } else {
@@ -155,10 +155,10 @@ function loadSearch() {
 
 //When you click a previously searched City - need to run through get coords again
 function reRunSearch(event) {
+    //when you click a button of previous city, re-run event to search coordinates for city's weather
     getCoords(event.target.innerHTML)
 }
 
 loadSearch();
 searchFormEl.addEventListener("submit", formSubmitHandler);
 searchListEl.addEventListener("click", reRunSearch);
-
