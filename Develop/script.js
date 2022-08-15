@@ -40,7 +40,7 @@ let cityName = searchInputEl.value;
 
 //Take the city Name from above & convert to coordinates
 function getCoords(cityName) {
-    let apiURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
+    let apiURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
     //Print City Name in Current Weather Card
     currentCity.textContent = cityName;
 
