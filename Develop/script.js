@@ -76,8 +76,7 @@ function getCoords(cityName) {
 function displayCurrentWeather(data) {
     //Unhide Right Side
     rightSide.style.visibility = "visible";
-
-    //New Attempt
+    //API Url taking in the city's lat & long to get the city Name from the lat & lon
     let apiUrl = "https://api.openweathermap.org/geo/1.0/reverse?lat=" + data.lat + "&lon=" + data.lon + "&limit=1&appid=" + apiKey + '&units=imperial'
     //Current Weather Icon
     let iconLink = "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png";
@@ -88,6 +87,7 @@ function displayCurrentWeather(data) {
         let cIcon = document.querySelector("#currentimg");
         cIcon.src = iconLink;
         console.log(data[0].name);
+        //Pushing the city Name to the SaveSearch Function which goes to local storage
         cityName=data[0].name;
         saveSeach(cityName);
     })
@@ -127,7 +127,7 @@ function saveSeach(cityName) {
     if (search.includes(cityName)) {
         return;
     } else {
-        //previously searched city names go to local storage in an array wiht the name of "search"
+        //previously searched city names go to local storage in an array with the name of "search"
         search.push(cityName)
         localStorage.setItem("search", JSON.stringify(search));
         var cityList = localStorage.getItem("search", JSON.stringify(search));
@@ -159,6 +159,9 @@ function reRunSearch(event) {
     getCoords(event.target.innerHTML)
 }
 
+//Load the search on startup
 loadSearch();
+//When user clicks submit, run through function formSubmitHandler
 searchFormEl.addEventListener("submit", formSubmitHandler);
+//When user clicks a button, run through reRunSearch function 
 searchListEl.addEventListener("click", reRunSearch);
